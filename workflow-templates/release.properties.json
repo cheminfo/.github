@@ -1,0 +1,7 @@
+{
+  "name": "Release Node.js package",
+  "description": "Run release-please to automatically open release pull requests and publish releases to GitHub and npm",
+  "iconName": "js",
+  "categories": ["JavaScript", "TypeScript"],
+  "filePatterns": ["package.json$"]
+}
