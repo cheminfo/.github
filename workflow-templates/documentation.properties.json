@@ -1,7 +1,0 @@
-{
-  "name": "Deploy documentation on GitHub pages",
-  "description": "Build and deploy documentation on GitHub pages",
-  "iconName": "js",
-  "categories": ["JavaScript"],
-  "filePatterns": ["package.json$"]
-}
