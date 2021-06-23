@@ -1,0 +1,5 @@
+{
+  "name": "Docker image",
+  "description": "Create and publish a Docker image when a tag is pushed",
+  "filePatterns": ["Dockerfile$"]
+}
