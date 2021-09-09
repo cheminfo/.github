@@ -2,6 +2,5 @@
   "name": "Node.js CI",
   "description": "Run linter and tests for a Node.js project",
   "iconName": "js",
-  "categories": ["JavaScript"],
-  "filePatterns": ["package.json$"]
+  "categories": ["JavaScript"]
 }
