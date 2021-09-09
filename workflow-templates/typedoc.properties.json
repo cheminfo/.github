@@ -1,7 +1,7 @@
 {
   "name": "Deploy TypeDoc on GitHub pages",
   "description": "Build documentation using TypeDoc and deploy it on GitHub pages",
-  "iconName": "js",
+  "iconName": "ts",
   "categories": ["TypeScript"],
   "filePatterns": ["package.json$"]
 }

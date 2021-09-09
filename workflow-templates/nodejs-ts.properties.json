@@ -1,0 +1,7 @@
+{
+  "name": "Node.js CI",
+  "description": "Run linter and tests for a TypeScript Node.js project",
+  "iconName": "ts",
+  "categories": ["TypeScript"],
+  "filePatterns": ["package.json$"]
+}
