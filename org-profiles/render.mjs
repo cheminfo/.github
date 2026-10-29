@@ -14,11 +14,11 @@ export function renderReadme(organization, stats, siblings, context) {
   const { login, title } = organization;
   const created = monthLabel(stats.createdAt);
   const period = `the last ${context.months} months`;
-  const alt = `${title}: ${integer.format(stats.repositories)} repositories, ${integer.format(stats.packages.length)} packages on npm, ${compactWords(stats.totalDownloads)} downloads in ${context.month}, ${compactWords(stats.periodDownloads)} in ${period}. GitHub organization created at EPFL by Luc Patiny in ${created}.`;
+  const alt = `${title}: ${integer.format(stats.repositories)} repositories, ${integer.format(stats.packages.length)} packages on npm, ${compactWords(stats.totalDownloads)} downloads in ${context.month}, ${compactWords(stats.periodDownloads)} in ${period}. GitHub organization created in ${created} in the group of Luc Patiny at EPFL.`;
   const lines = [
     ...picture('stats', alt),
     '',
-    `The **${title}** organization on GitHub was created at [EPFL](https://www.epfl.ch) by [Luc Patiny](https://github.com/lpatiny) in ${created}. ${organization.about}`,
+    `The **${title}** organization on GitHub was created in ${created} in the group of [Luc Patiny](https://github.com/lpatiny) at [EPFL](https://www.epfl.ch). ${organization.about}`,
     '',
     `It contains **${integer.format(stats.repositories)} public repositories** and **${integer.format(stats.packages.length)} packages published on npm**, downloaded **${integer.format(stats.totalDownloads)} times in ${context.month}** and **${integer.format(stats.periodDownloads)} times in ${period}** (${context.firstMonth} to ${context.month}). Many of these packages are currently maintained by [Zakodium Sàrl](https://www.zakodium.com).`,
     '',

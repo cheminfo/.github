@@ -55,7 +55,7 @@ export function renderCard({ title, tagline, created, stats, accent, theme }) {
         `<stop offset="${index / Math.max(1, accent.bar.length - 1)}" stop-color="${color}"/>`,
     )
     .join('');
-  const label = `${title}: ${stats.map((stat) => `${stat.value} ${stat.label}`).join(', ')}. GitHub organization created at EPFL by Luc Patiny in ${created}.`;
+  const label = `${title}: ${stats.map((stat) => `${stat.value} ${stat.label}`).join(', ')}. GitHub organization created in ${created} in the group of Luc Patiny at EPFL.`;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="${HEIGHT}" viewBox="0 0 ${WIDTH} ${HEIGHT}" role="img" aria-label="${escapeXml(label)}">
   <title>${escapeXml(label)}</title>
   <style>
@@ -82,8 +82,8 @@ export function renderCard({ title, tagline, created, stats, accent, theme }) {
   <text x="${MARGIN}" y="88" class="title" fill="${colors.text}">${escapeXml(title)}</text>
   <text x="${MARGIN}" y="126" class="tagline" fill="${colors.muted}">${escapeXml(tagline)}</text>
   <g transform="translate(${WIDTH - MARGIN - 120} 52) scale(${120 / 182.4})" fill="${colors.epfl}">${EPFL_LOGO}</g>
-  <text x="${WIDTH - MARGIN}" y="116" text-anchor="end" class="credit" fill="${colors.muted}">GitHub organization created</text>
-  <text x="${WIDTH - MARGIN}" y="136" text-anchor="end" class="credit" fill="${colors.muted}">by Luc Patiny in ${escapeXml(created)}</text>
+  <text x="${WIDTH - MARGIN}" y="116" text-anchor="end" class="credit" fill="${colors.muted}">Created in ${escapeXml(created)}</text>
+  <text x="${WIDTH - MARGIN}" y="136" text-anchor="end" class="credit" fill="${colors.muted}">in the group of Luc Patiny</text>
   <line x1="${MARGIN}" y1="170" x2="${WIDTH - MARGIN}" y2="170" stroke="${colors.border}"/>${tiles}
 </svg>
 `;

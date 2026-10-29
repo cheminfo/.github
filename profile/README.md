@@ -1,9 +1,9 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="stats-dark.svg">
-  <img alt="cheminfo: 262 repositories, 175 packages on npm, 12.7 million downloads in September 2026, 107 million in the last 12 months. GitHub organization created at EPFL by Luc Patiny in October 2012." src="stats-light.svg" width="100%">
+  <img alt="cheminfo: 262 repositories, 175 packages on npm, 12.7 million downloads in September 2026, 107 million in the last 12 months. GitHub organization created in October 2012 in the group of Luc Patiny at EPFL." src="stats-light.svg" width="100%">
 </picture>
 
-The **cheminfo** organization on GitHub was created at [EPFL](https://www.epfl.ch) by [Luc Patiny](https://github.com/lpatiny) in October 2012. It gathers open-source JavaScript and TypeScript tools for chemistry, for the browser and Node.js: parsers and converters for analytical data (NMR, mass spectrometry, IR, Raman, UV-vis, XPS, chromatography and more), molecular formulas and structures with [OpenChemLib JS](https://github.com/cheminfo/openchemlib-js), and web applications such as [NMRium](https://github.com/cheminfo/nmrium).
+The **cheminfo** organization on GitHub was created in October 2012 in the group of [Luc Patiny](https://github.com/lpatiny) at [EPFL](https://www.epfl.ch). It gathers open-source JavaScript and TypeScript tools for chemistry, for the browser and Node.js: parsers and converters for analytical data (NMR, mass spectrometry, IR, Raman, UV-vis, XPS, chromatography and more), molecular formulas and structures with [OpenChemLib JS](https://github.com/cheminfo/openchemlib-js), and web applications such as [NMRium](https://github.com/cheminfo/nmrium).
 
 It contains **262 public repositories** and **175 packages published on npm**, downloaded **12,730,147 times in September 2026** and **107,387,150 times in the last 12 months** (October 2025 to September 2026). Many of these packages are currently maintained by [Zakodium Sàrl](https://www.zakodium.com).
 
