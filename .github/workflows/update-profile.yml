@@ -1,0 +1,52 @@
+# Regenerates profile/ (the page shown on the organization's GitHub page) and
+# data/<month>.json every month, from the GitHub and npm APIs. The generator
+# lives in cheminfo/.github/org-profiles; this file is identical in the .github
+# repository of cheminfo, mljs and image-js.
+
+name: Update profile
+
+on:
+  schedule:
+    # The 3rd of each month, once npm has complete numbers for the month before.
+    - cron: '17 5 3 * *'
+  workflow_dispatch:
+    inputs:
+      month:
+        description: Month to report (YYYY-MM), the last complete month when empty
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      OWNER: ${{ github.repository_owner }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: repos/${{ github.repository_owner }}/.github
+      - uses: actions/checkout@v6
+        with:
+          repository: cheminfo/.github
+          path: generator
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - name: Collect the numbers and render the page
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          MONTH: ${{ inputs.month }}
+        run: node generator/org-profiles/update.mjs --root repos --org "$OWNER" ${MONTH:+--month "$MONTH"}
+      - name: Commit and push
+        working-directory: repos/${{ github.repository_owner }}/.github
+        run: |
+          git add profile data
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'chore: update organization profile'
+          git push
