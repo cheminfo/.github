@@ -5,13 +5,15 @@ const REPOSITORIES_QUERY = `
 query ($org: String!, $cursor: String) {
   organization(login: $org) {
     createdAt
-    repositories(first: 100, after: $cursor, privacy: PUBLIC, isFork: false) {
+    repositories(first: 50, after: $cursor, privacy: PUBLIC, isFork: false) {
       pageInfo { hasNextPage endCursor }
       nodes {
         name
         isArchived
         stargazerCount
         packageJson: object(expression: "HEAD:package.json") { ... on Blob { text } }
+        lerna: object(expression: "HEAD:lerna.json") { ... on Blob { text } }
+        pnpm: object(expression: "HEAD:pnpm-workspace.yaml") { ... on Blob { text } }
       }
     }
   }
@@ -112,15 +114,11 @@ async function listRepositories(org) {
 
 async function packagesOfRepository(org, repository) {
   const root = parsePackageJson(repository.packageJson?.text);
-  if (!root) return [];
   const result = [];
-  if (root.name && !root.private) {
+  if (root?.name && !root.private) {
     result.push({ name: root.name, repository: repository.name });
   }
-  const workspaces = Array.isArray(root.workspaces)
-    ? root.workspaces
-    : (root.workspaces?.packages ?? []);
-  for (const pattern of workspaces) {
+  for (const pattern of workspacePatterns(root, repository)) {
     for (const manifest of await workspaceManifests(
       org,
       repository.name,
@@ -132,6 +130,26 @@ async function packagesOfRepository(org, repository) {
     }
   }
   return result;
+}
+
+// Monorepos declare their packages in package.json, in lerna.json (older ones, such as
+// mljs/array-xy) or in pnpm-workspace.yaml.
+function workspacePatterns(root, repository) {
+  const patterns = Array.isArray(root?.workspaces)
+    ? [...root.workspaces]
+    : [...(root?.workspaces?.packages ?? [])];
+  if (repository.lerna) {
+    const lerna = parsePackageJson(repository.lerna.text);
+    patterns.push(...(lerna?.packages ?? ['packages/*']));
+  }
+  if (repository.pnpm) {
+    for (const [, pattern] of repository.pnpm.text.matchAll(
+      /^\s*-\s*['"]?([^'"#\s]+)['"]?/gm,
+    )) {
+      if (!pattern.startsWith('!')) patterns.push(pattern);
+    }
+  }
+  return [...new Set(patterns.map((pattern) => pattern.replace(/^\.\//, '')))];
 }
 
 async function workspaceManifests(org, name, pattern) {
